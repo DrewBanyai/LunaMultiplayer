@@ -47,7 +47,7 @@ namespace LmpClient.Extensions
                 {
                     if (verboseErrors)
                     {
-                        var msg = $"Protovessel {pv.vesselID} ({pv.vesselName}) contains the BANNED RESOURCE/S '{string.Join(", ", invalidResources)}'. Skipping load.";
+                        var msg = $"Protovessel {pv.vesselID} ({pv.vesselName}) contains the BANNED RESOURCE/S '{string.Join(", ", invalidResources)}' ON PART '{pps.partName}'. Skipping load.";
                         LunaLog.LogWarning(msg);
                         ChatSystem.Singleton.PmMessageServer(msg);
                     }
