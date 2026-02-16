@@ -33,6 +33,8 @@ namespace Server.Command
             RegisterCommand("setscience", new SetScienceCommand().Execute, "Set science value");
             RegisterCommand("restartserver", new RestartServerCommand().Execute, "Restarts the server");
             RegisterCommand("say", new SayCommand().Execute, "Broadcasts a message to clients");
+            RegisterCommand("vessel", new VesselCommand().Execute, "Vessel related commands. Usage: /vessel info [name/guid]");
+            RegisterCommand("backup", new BackupCommand().Execute, "Backup related commands. Usage: /backup [now]");
         }
 
         /// <summary>
