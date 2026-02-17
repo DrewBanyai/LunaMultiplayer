@@ -29,10 +29,10 @@ namespace Server.Upnp
             return await nat.DiscoverDeviceAsync(PortMapper.Upnp, new CancellationTokenSource(ConnectionSettings.SettingsStore.UpnpMsTimeout));
         }
 
-        static LmpPortMapper() => ExitEvent.ServerClosing += async () =>
+        static LmpPortMapper() => ExitEvent.ServerClosing += () =>
         {
-            await CloseLmpPortAsync();
-            await CloseWebPortAsync();
+            CloseLmpPortAsync().Wait();
+            CloseWebPortAsync().Wait();
         };
 
         /// <summary>
