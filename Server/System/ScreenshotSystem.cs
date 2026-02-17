@@ -62,7 +62,7 @@ namespace Server.System
                     }
                     else
                     {
-                        LunaLog.Warning($"{client.PlayerName} tried to overwrite a screnshot!");
+                        LunaLog.Warning($"{client.PlayerName} tried to overwrite a screenshot!");
                         return;
                     }
                 }

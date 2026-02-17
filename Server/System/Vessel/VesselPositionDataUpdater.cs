@@ -65,6 +65,7 @@ namespace Server.System.Vessel
                         vessel.Orbit.Update("MNA", msgData.Orbit[5].ToString(CultureInfo.InvariantCulture));
                         vessel.Orbit.Update("EPH", msgData.Orbit[6].ToString(CultureInfo.InvariantCulture));
                         vessel.Orbit.Update("REF", msgData.Orbit[7].ToString(CultureInfo.InvariantCulture));
+                        vessel.Orbit.Update("body", msgData.BodyName);
                     }
                 });
             }
