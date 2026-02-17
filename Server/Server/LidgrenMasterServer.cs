@@ -24,7 +24,7 @@ namespace Server.Server
         public static ConcurrentBag<IPEndPoint> DetectedSTUNTransportAddresses { get; private set; } = new();
         public static readonly SemaphoreSlim ReceiveSTUNResponses = new(0, 1);
 
-        public static async void RegisterWithMasterServer()
+        public static async Task RegisterWithMasterServerAsync()
         {
             if (!MasterServerSettings.SettingsStore.RegisterWithMasterServer) return;
 
@@ -91,7 +91,7 @@ namespace Server.Server
 
         private static void RegisterWithMasterServer(MsRegisterServerMsgData msgData, IPEndPoint masterServer)
         {
-            Task.Run(() =>
+            _ = Task.Run(() =>
             {
                 var msg = ServerContext.MasterServerMessageFactory.CreateNew<MainMstSrvMsg>(msgData);
                 msg.Data.SentTime = LunaNetworkTime.UtcNow.Ticks;
@@ -118,7 +118,7 @@ namespace Server.Server
         /// of our message and comparing them.
         /// If they differ it means this server is behind symmetric NAT.
         /// </summary
-        public static async void CheckNATType()
+        public static async Task CheckNATTypeAsync()
         {
             var msgData = ServerContext.ServerMessageFactory.CreateNewMessageData<MsSTUNBindingRequestMsgData>();
             msgData.SentTime = LunaNetworkTime.UtcNow.Ticks;

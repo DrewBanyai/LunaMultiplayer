@@ -40,7 +40,7 @@ namespace Server.Command
         /// <summary>
         /// We receive the console inputs with a pipe
         /// </summary>
-        public static async void ThreadMain()
+        public static async Task ThreadMainAsync()
         {
             try
             {
