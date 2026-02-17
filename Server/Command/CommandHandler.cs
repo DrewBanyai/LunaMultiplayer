@@ -15,6 +15,8 @@ namespace Server.Command
         public static readonly ConcurrentDictionary<string, CommandDefinition> Commands =
             new ConcurrentDictionary<string, CommandDefinition>();
 
+        public static bool UseStandardConsole = true;
+
         private static void RegisterCommands()
         {
             //Register the server Commands
@@ -46,24 +48,27 @@ namespace Server.Command
             {
                 while (ServerContext.ServerRunning)
                 {
-                    var input = Console.ReadLine();
-                    if (input == null)
+                    if (UseStandardConsole)
                     {
-                        LunaLog.Normal("End of stdin, stopping command listener");
-                        break;
-                    }
-                    if (!string.IsNullOrEmpty(input))
-                    {
-                        LunaLog.Normal($"Command input: {input}");
+                        var input = Console.ReadLine();
+                        if (input == null)
+                        {
+                            LunaLog.Normal("End of stdin, stopping command listener");
+                            break;
+                        }
                         if (!string.IsNullOrEmpty(input))
                         {
-                            if (input.StartsWith("/"))
+                            LunaLog.Normal($"Command input: {input}");
+                            if (!string.IsNullOrEmpty(input))
                             {
-                                HandleServerInput(input.Substring(1));
-                            }
-                            else
-                            {
-                                Commands["say"].Func(input);
+                                if (input.StartsWith("/"))
+                                {
+                                    HandleServerInput(input.Substring(1));
+                                }
+                                else
+                                {
+                                    Commands["say"].Func(input);
+                                }
                             }
                         }
                     }
