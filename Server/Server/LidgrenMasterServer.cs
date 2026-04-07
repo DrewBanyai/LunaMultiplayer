@@ -139,7 +139,7 @@ namespace Server.Server
 
             // Wait two seconds for responses to arrive, then wait for any in-flight message to finish processing,
             await Task.Delay(2000);
-            ReceiveSTUNResponses.Wait();
+            await ReceiveSTUNResponses.WaitAsync();
 
             var distinctAddresses = DetectedSTUNTransportAddresses.Distinct();
             LunaLog.Debug("Detected NAT addresses: " + string.Join(", ", distinctAddresses.Select(a => a.ToString())));
