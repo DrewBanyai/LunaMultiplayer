@@ -265,7 +265,8 @@ namespace Server.Tui
                 Ping = (int)(c.Connection?.AverageRoundtripTime * 1000 ?? 0),
                 OnlineTime = DateTime.UtcNow - c.ConnectionTime,
                 LockCount = LockSystem.LockQuery.GetAllPlayerLocks(c.PlayerName).Count(),
-                KspVersion = string.IsNullOrWhiteSpace(c.KspVersion) ? "N/A" : c.KspVersion
+                KspVersion = string.IsNullOrWhiteSpace(c.KspVersion) ? "N/A" : c.KspVersion,
+                LmpVersion = string.IsNullOrWhiteSpace(c.LmpVersion) ? "Unknown" : c.LmpVersion
             }).ToList();
 
             var vesselDetails = VesselStoreSystem.CurrentVessels.Values.Select(v => {

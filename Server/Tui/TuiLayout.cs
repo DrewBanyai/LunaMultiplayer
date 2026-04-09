@@ -15,6 +15,7 @@ namespace Server.Tui
         public TimeSpan OnlineTime { get; set; }
         public int LockCount { get; set; }
         public string KspVersion { get; set; }
+        public string LmpVersion { get; set; }
     }
 
     public class VesselTuiInfo
@@ -220,6 +221,7 @@ namespace Server.Tui
             table.AddColumn("[bold]Online Time[/]");
             table.AddColumn("[bold]Locks[/]");
             table.AddColumn("[bold]KSP Version[/]");
+            table.AddColumn("[bold]LMP Version[/]");
 
             foreach (var p in players)
             {
@@ -229,7 +231,8 @@ namespace Server.Tui
                     new Markup($"[yellow]{p.Ping}ms[/]"),
                     new Markup(onlineStr),
                     new Markup($"[blue]{p.LockCount}[/]"),
-                    new Markup($"[grey74]{Markup.Escape(p.KspVersion ?? "N/A")}[/]")
+                    new Markup($"[grey74]{Markup.Escape(p.KspVersion ?? "N/A")}[/]"),
+                    new Markup($"[grey74]{Markup.Escape(p.LmpVersion ?? "Unknown")}[/]")
                 );
             }
 
