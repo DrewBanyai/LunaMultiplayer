@@ -20,6 +20,7 @@ namespace Server.Client
 
         public string UniqueIdentifier { get; set; }
         public string KspVersion { get; set; }
+        public string LmpVersion { get; set; }
 
         public bool Authenticated { get; set; }
 
