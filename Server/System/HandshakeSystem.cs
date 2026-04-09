@@ -34,7 +34,7 @@ namespace Server.System
                 client.PlayerName = data.PlayerName;
                 client.UniqueIdentifier = data.UniqueIdentifier;
                 client.KspVersion = string.IsNullOrWhiteSpace(data.KspVersion) ? "Unknown" : data.KspVersion;
-                client.LmpVersion = string.IsNullOrWhiteSpace(data.LmpVersion) ? $"{data.MajorVersion}.{data.MinorVersion}.{data.BuildVersion}" : data.LmpVersion;
+                client.LmpVersion = $"{data.MajorVersion}.{data.MinorVersion}.{data.BuildVersion}";
                 client.Authenticated = true;
 
                 LmpPluginHandler.FireOnClientAuthenticated(client);

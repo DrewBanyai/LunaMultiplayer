@@ -13,7 +13,6 @@ namespace LmpCommon.Message.Data.Handshake
         public string PlayerName;
         public string UniqueIdentifier;
         public string KspVersion;
-        public string LmpVersion;
 
         public override string ClassName { get; } = nameof(HandshakeRequestMsgData);
 
@@ -24,7 +23,6 @@ namespace LmpCommon.Message.Data.Handshake
             lidgrenMsg.Write(PlayerName);
             lidgrenMsg.Write(UniqueIdentifier);
             lidgrenMsg.Write(KspVersion);
-            lidgrenMsg.Write(LmpVersion ?? string.Empty);
         }
 
         internal override void InternalDeserialize(NetIncomingMessage lidgrenMsg)
@@ -37,13 +35,11 @@ namespace LmpCommon.Message.Data.Handshake
             //  For backwards compatibility with 0.29.0, only continue reading if there are more bytes to read
             if (lidgrenMsg.Position < lidgrenMsg.LengthBits)
                 KspVersion = lidgrenMsg.ReadString();
-            if (lidgrenMsg.Position < lidgrenMsg.LengthBits)
-                LmpVersion = lidgrenMsg.ReadString();
         }
 
         internal override int InternalGetMessageSize()
         {
-            return base.InternalGetMessageSize() + PlayerName.GetByteCount() + UniqueIdentifier.GetByteCount() + KspVersion.GetByteCount() + (LmpVersion ?? string.Empty).GetByteCount();
+            return base.InternalGetMessageSize() + PlayerName.GetByteCount() + UniqueIdentifier.GetByteCount() + KspVersion.GetByteCount();
         }
     }
 }
