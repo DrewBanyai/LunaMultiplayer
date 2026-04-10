@@ -19,6 +19,7 @@
     <PackageReference Include="LunaConfigNode" Version="1.8.1" />
     <PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.8.14" />
     <PackageReference Include="Mono.Nat" Version="3.0.4" />
+    <PackageReference Include="Spectre.Console" Version="0.54.0" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
   </ItemGroup>
 

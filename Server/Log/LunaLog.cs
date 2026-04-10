@@ -30,7 +30,14 @@ namespace Server.Log
         {
             base.AfterPrint(line);
             FileHandler.AppendToFile(LogFilename, line + Environment.NewLine);
+            OnLog?.Invoke(line);
         }
+
+        #endregion
+
+        #region Events
+
+        public static event Action<string> OnLog;
 
         #endregion
 

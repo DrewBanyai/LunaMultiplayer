@@ -3,7 +3,6 @@ using LmpClient.Base.Interface;
 using LmpClient.Network;
 using LmpClient.Systems.SettingsSys;
 using LmpClient.Utilities;
-using LmpCommon;
 using LmpCommon.Message.Client;
 using LmpCommon.Message.Data.Handshake;
 using LmpCommon.Message.Interface;

@@ -1,4 +1,5 @@
-﻿using Server.Context;
+﻿using System;
+using Server.Context;
 using Server.Events;
 using Server.Log;
 using Server.Settings.Structures;
@@ -13,6 +14,7 @@ namespace Server.System
         static BackupSystem() => ExitEvent.ServerClosing += RunBackup;
 
         private static readonly object LockObj = new object();
+        public static DateTime LastBackupTime { get; private set; } = DateTime.MinValue;
 
         public static async Task PerformBackupsAsync(CancellationToken token)
         {
@@ -44,6 +46,7 @@ namespace Server.System
                 TimeSystem.BackupStartTime();
                 ScenarioStoreSystem.BackupScenarios();
                 LunaLog.Debug("Backups done");
+                LastBackupTime = DateTime.UtcNow;
             }
         }
     }

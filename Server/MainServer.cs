@@ -12,6 +12,7 @@ using Server.Settings;
 using Server.Settings.Structures;
 using Server.System;
 using Server.Upnp;
+using Server.Tui;
 using Server.Utilities;
 using Server.Web;
 using System;
@@ -49,7 +50,7 @@ namespace Server
                 Thread.CurrentThread.CurrentCulture = ci;
                 Thread.CurrentThread.CurrentUICulture = ci;
 
-                if (Common.PlatformIsWindows())
+                if (OperatingSystem.IsWindows())
                     Console.Title = $"LMP {LmpVersioning.CurrentVersion}";
 
                 Console.OutputEncoding = Encoding.UTF8;
@@ -57,7 +58,7 @@ namespace Server
                 LunaLog.Info("Remember! Quit the server by using 'Control + C' so a backup is properly made before closing!");
                 LunaLog.Info("Documentation available at https://github.com/LunaMultiplayer/LunaMultiplayer/wiki");
 
-                if (Common.PlatformIsWindows())
+                if (OperatingSystem.IsWindows())
                     ExitSignal.Exit += (sender, args) => _ = ExitAsync();
                 else
                 {
@@ -67,7 +68,7 @@ namespace Server
 
                 //We disable quick edit as otherwise when you select some text for copy/paste then you can't write to the console and server freezes
                 //This just happens on windows....
-                if (Common.PlatformIsWindows())
+                if (OperatingSystem.IsWindows())
                     ConsoleUtil.DisableConsoleQuickEdit();
 
                 //We cannot run more than 6 instances ofd servers + clients as otherwise the sync time will fail (30 seconds / 5 seconds = 6) but we use 3 for safety
@@ -120,6 +121,8 @@ namespace Server
 
                 TaskContainer.Add(LongRunTaskFactory.StartNew(() => GcSystem.PerformGarbageCollectionAsync(CancellationTokenSrc.Token), CancellationTokenSrc.Token));
 
+                TuiEngine.Start(CancellationTokenSrc.Token);
+
                 while (ServerContext.ServerStarting)
                     Thread.Sleep(500);
 
@@ -161,7 +164,7 @@ namespace Server
                 ModFileSystem.LoadModFile();
             }
 
-            if (Common.PlatformIsWindows())
+            if (OperatingSystem.IsWindows())
             {
                 Console.Title += $" ({GeneralSettings.SettingsStore.ServerName})";
 #if DEBUG
